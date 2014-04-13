@@ -133,8 +133,8 @@ public class EasService extends Service {
         }
 
         @Override
-        public void setLogging(final int flags) {
-            LogUtils.d(TAG, "IEmailService.setLogging");
+        public void setServiceBitfields(final int flags) {
+            LogUtils.d(TAG, "IEmailService.setServiceBitfields");
         }
 
         @Override

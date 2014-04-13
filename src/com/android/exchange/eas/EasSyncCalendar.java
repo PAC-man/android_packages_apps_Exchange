@@ -1075,12 +1075,12 @@ public class EasSyncCalendar extends EasSyncCollectionTypeBase {
             LogUtils.d(TAG, "No outbox for account %d, creating it", account.mId);
             final Mailbox outbox =
                     Mailbox.newSystemMailbox(context, account.mId, Mailbox.TYPE_OUTBOX);
-            outbox.save(context);
+            outbox.save(context, Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
             mailboxId = outbox.mId;
         }
         msg.mMailboxKey = mailboxId;
         msg.mAccountKey = account.mId;
-        msg.save(context);
+        msg.save(context, Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
         requestSyncForMailbox(EmailContent.AUTHORITY, mailboxId);
     }
 

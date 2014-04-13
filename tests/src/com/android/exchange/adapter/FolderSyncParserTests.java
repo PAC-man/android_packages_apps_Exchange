@@ -63,7 +63,7 @@ public class FolderSyncParserTests extends SyncAdapterTestCase<EmailSyncAdapter>
         } else {
             box.mServerId = "serverId-" + mCreationTime + '-' + mServerIdCount++;
         }
-        box.save(mProviderContext);
+        box.save(mProviderContext, false);
         return box;
     }
 
@@ -77,7 +77,7 @@ public class FolderSyncParserTests extends SyncAdapterTestCase<EmailSyncAdapter>
         EasSyncService service = getTestService();
         EmailSyncAdapter adapter = new EmailSyncAdapter(service);
         FolderSyncParser parser = new FolderSyncParser(getTestInputStream(), adapter);
-        mAccount.save(mProviderContext);
+        mAccount.save(mProviderContext, false);
 
         parser.mAccount = mAccount;
         parser.mAccountId = mAccount.mId;
@@ -302,7 +302,7 @@ public class FolderSyncParserTests extends SyncAdapterTestCase<EmailSyncAdapter>
         EasSyncService service = getTestService();
         EmailSyncAdapter adapter = new EmailSyncAdapter(service);
         FolderSyncParser parser = new MockFolderSyncParser(fileName, adapter);
-        mAccount.save(mProviderContext);
+        mAccount.save(mProviderContext, false);
         mMailboxQueryArgs[0] = Long.toString(mAccount.mId);
         parser.mAccount = mAccount;
         parser.mAccountId = mAccount.mId;
@@ -358,7 +358,7 @@ public class FolderSyncParserTests extends SyncAdapterTestCase<EmailSyncAdapter>
         EasSyncService service = getTestService();
         EmailSyncAdapter adapter = new EmailSyncAdapter(service);
         FolderSyncParser parser = new MockFolderSyncParser("FolderSyncParserTest3.txt", adapter);
-        mAccount.save(mProviderContext);
+        mAccount.save(mProviderContext, false);
         mMailboxQueryArgs[0] = Long.toString(mAccount.mId);
         parser.mAccount = mAccount;
         parser.mAccountId = mAccount.mId;

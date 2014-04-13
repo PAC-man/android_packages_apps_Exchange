@@ -44,6 +44,10 @@ public class Eas {
     public static boolean FILE_LOG = false;     // DO NOT CHECK IN WITH THIS SET TO TRUE
 
     public static final String CLIENT_VERSION = "EAS-2.0";
+
+    // Whether to bypass policy requirements (e.g., bypass/ignore remote wipe requests).
+    public static boolean ENABLE_BYPASS_POLICY_REQUIREMENTS = false;
+
     public static final String ACCOUNT_MAILBOX_PREFIX = "__eas";
 
     // Define our default protocol version as 2.5 (Exchange 2003)
@@ -140,6 +144,10 @@ public class Eas {
             LogUtils.d("Eas Debug", "Logging: " + (USER_LOG ? "User " : "") +
                     (PARSER_LOG ? "Parser " : "") + (FILE_LOG ? "File" : ""));
         }
+    }
+
+    public static void setExchangeBypassPolicyRequirements(int state) {
+        Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS = (state & EmailServiceProxy.ENABLE_BYPASS_POLICY_REQUIREMENTS_BIT) != 0;
     }
 
     static public Double getProtocolVersionDouble(String version) {
