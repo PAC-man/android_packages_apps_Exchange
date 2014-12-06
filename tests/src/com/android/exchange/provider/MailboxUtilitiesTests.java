@@ -160,7 +160,7 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box3 = EmailContentSetupUtils.setupMailbox(
                 "box3", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL, box1);
         box3.mParentKey = Mailbox.PARENT_KEY_UNINITIALIZED;
-        box3.save(mProviderContext);
+        box3.save(mProviderContext, false);
         simulateFolderSyncChangeHandling(accountSelector, box1 /*box3's parent*/);
 
         box1 = Mailbox.restoreMailboxWithId(mProviderContext, box1.mId);
@@ -204,7 +204,7 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box3 = EmailContentSetupUtils.setupMailbox(
                 "box3", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL, box2);
         box3.mParentKey = Mailbox.PARENT_KEY_UNINITIALIZED;
-        box3.save(mProviderContext);
+        box3.save(mProviderContext, false);
         simulateFolderSyncChangeHandling(accountSelector, box3 /*box3's parent*/);
 
         box1 = Mailbox.restoreMailboxWithId(mProviderContext, box1.mId);
@@ -248,7 +248,7 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box3 = EmailContentSetupUtils.setupMailbox(
                 "box3", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box3.mParentKey = Mailbox.PARENT_KEY_UNINITIALIZED;
-        box3.save(mProviderContext);
+        box3.save(mProviderContext, false);
 
         simulateFolderSyncChangeHandling(accountSelector);
         box1 = Mailbox.restoreMailboxWithId(mProviderContext, box1.mId);
@@ -545,7 +545,7 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box1 = EmailContentSetupUtils.setupMailbox(
                 "box1", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box1.mServerId = null;
-        box1.save(mProviderContext);
+        box1.save(mProviderContext, false);
         Mailbox box2 = EmailContentSetupUtils.setupMailbox(
                 "box2", mAccount.mId, true, mProviderContext, Mailbox.TYPE_OUTBOX, box1);
 
@@ -644,15 +644,15 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box1 = EmailContentSetupUtils.setupMailbox(
                 "box1", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box1.mServerId = "1:1";
-        box1.save(mProviderContext);
+        box1.save(mProviderContext, false);
         Mailbox box2 = EmailContentSetupUtils.setupMailbox(
                 "box2", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box2.mServerId = "1:2";
-        box2.save(mProviderContext);
+        box2.save(mProviderContext, false);
         Mailbox box3 = EmailContentSetupUtils.setupMailbox(
                 "box3", mAccount.mId, false, mProviderContext, Mailbox.TYPE_MAIL, box1);
         box3.mServerId = "1:3";
-        box3.save(mProviderContext);
+        box3.save(mProviderContext, false);
 
         // Box5 is in Box4; Box 6 is in Box5
         // Note that the three serverId's are identical to those in acct1; we want to make sure
@@ -660,15 +660,15 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box4 = EmailContentSetupUtils.setupMailbox(
                 "box4", acct2.mId, false, mProviderContext, Mailbox.TYPE_MAIL, null);
         box4.mServerId = "1:1";
-        box4.save(mProviderContext);
+        box4.save(mProviderContext, false);
         Mailbox box5 = EmailContentSetupUtils.setupMailbox(
                 "box5", acct2.mId, false, mProviderContext, Mailbox.TYPE_MAIL, box4);
         box5.mServerId = "1:2";
-        box5.save(mProviderContext);
+        box5.save(mProviderContext, false);
         Mailbox box6 = EmailContentSetupUtils.setupMailbox(
                 "box6", acct2.mId, false, mProviderContext, Mailbox.TYPE_MAIL, box5);
         box6.mServerId = "1:3";
-        box6.save(mProviderContext);
+        box6.save(mProviderContext, false);
 
         // Manually set parentKey to null for all mailboxes, as if an initial sync or post-upgrade
         mResolver.update(Mailbox.CONTENT_URI, mNullParentKey, null, null);
@@ -777,29 +777,29 @@ public class MailboxUtilitiesTests extends ExchangeTestCase {
         Mailbox box1 = EmailContentSetupUtils.setupMailbox(
                 "box1", accountId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box1.mServerId = "1:1";
-        box1.save(mProviderContext);
+        box1.save(mProviderContext, false);
         Mailbox box2 = EmailContentSetupUtils.setupMailbox(
                 "box2", accountId, false, mProviderContext, Mailbox.TYPE_MAIL);
         box2.mServerId = "1:2";
-        box2.save(mProviderContext);
+        box2.save(mProviderContext, false);
         Mailbox box3 = EmailContentSetupUtils.setupMailbox(
                 "box3", accountId, false, mProviderContext, Mailbox.TYPE_MAIL, box1);
         box3.mServerId = "1:3";
-        box3.save(mProviderContext);
+        box3.save(mProviderContext, false);
 
         // Box4 is in Box2; Box5 is in Box4; Box 6 is in Box5
         Mailbox box4 = EmailContentSetupUtils.setupMailbox(
                 "box4", accountId, false, mProviderContext, Mailbox.TYPE_MAIL, box2);
         box4.mServerId = "1:4";
-        box4.save(mProviderContext);
+        box4.save(mProviderContext, false);
         Mailbox box5 = EmailContentSetupUtils.setupMailbox(
                 "box5", accountId, false, mProviderContext, Mailbox.TYPE_MAIL, box4);
         box5.mServerId = "1:5";
-        box5.save(mProviderContext);
+        box5.save(mProviderContext, false);
         Mailbox box6 = EmailContentSetupUtils.setupMailbox(
                 "box6", accountId, false, mProviderContext, Mailbox.TYPE_MAIL, box5);
         box6.mServerId = "1:6";
-        box6.save(mProviderContext);
+        box6.save(mProviderContext, false);
 
         // Setup hierarchy
         String accountSelector1 = MailboxColumns.ACCOUNT_KEY + " IN (" + accountId + ")";

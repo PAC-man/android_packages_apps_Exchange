@@ -256,14 +256,14 @@ public class EasService extends Service {
         }
 
         @Override
-        public void setLogging(final int flags) {
-            sProtocolLogging = ((flags & EmailServiceProxy.DEBUG_EXCHANGE_BIT) != 0);
-            sFileLogging = ((flags & EmailServiceProxy.DEBUG_FILE_BIT) != 0);
+        public void setServiceBitfields(final int bitfield) {
+            sProtocolLogging = ((bitfield & EmailServiceProxy.DEBUG_EXCHANGE_BIT) != 0);
+            sFileLogging = ((bitfield & EmailServiceProxy.DEBUG_FILE_BIT) != 0);
             SharedPreferences sharedPrefs = EasService.this.getSharedPreferences(PREFERENCES_FILE,
                     Context.MODE_PRIVATE);
             sharedPrefs.edit().putBoolean(PROTOCOL_LOGGING_PREF, sProtocolLogging).apply();
             sharedPrefs.edit().putBoolean(FILE_LOGGING_PREF, sFileLogging).apply();
-            LogUtils.d(TAG, "IEmailService.setLogging %d, storing to shared pref", flags);
+            LogUtils.d(TAG, "IEmailService.setServiceBitfields %d, storing to shared pref", bitfield);
         }
 
         @Override

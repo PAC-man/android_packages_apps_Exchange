@@ -43,7 +43,7 @@ public class EmailContentSetupUtils {
         account.mEmailAddress = name + "@android.com";
         account.mProtocolVersion = "2.5" + name;
         if (saveIt) {
-            account.save(context);
+            account.save(context, false);
         }
         return account;
     }
@@ -75,7 +75,7 @@ public class EmailContentSetupUtils {
         box.mParentServerId = parentBox != null ? parentBox.mServerId : "parent-serverid-" + name;
 
         if (saveIt) {
-            box.save(context);
+            box.save(context, false);
         }
         return box;
     }
@@ -110,7 +110,7 @@ public class EmailContentSetupUtils {
         }
 
         if (saveIt) {
-            message.save(context);
+            message.save(context, false);
         }
         return message;
     }

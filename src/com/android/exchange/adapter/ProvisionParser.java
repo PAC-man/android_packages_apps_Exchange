@@ -75,7 +75,13 @@ public class ProvisionParser extends Parser {
     }
 
     public boolean hasSupportablePolicySet() {
-        return (mPolicy != null) && mIsSupportable;
+        if (Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS) {
+            LogUtils.i(TAG, "Bypassing Exchange policy requirements.");
+            return true;
+        } else {
+            LogUtils.i(TAG, "Not bypassing Exchange policy requirements.");
+            return (mPolicy != null) && mIsSupportable;
+        }
     }
 
     public void clearUnsupportablePolicies() {
@@ -95,7 +101,7 @@ public class ProvisionParser extends Parser {
      * policy documents, as all versions of the OS support the policies in xml documents).
      */
     private void setPolicy(Policy policy) {
-        policy.normalize();
+        policy.normalize(Eas.ENABLE_BYPASS_POLICY_REQUIREMENTS);
         StringBuilder sb = new StringBuilder();
         if (policy.mDontAllowAttachments) {
             addPolicyString(sb, R.string.policy_dont_allow_attachments);
